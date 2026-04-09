@@ -1,3 +1,5 @@
+![Astro-Quant Banner](docs/assets/banner.png)
+
 # Astro-Quant: Kantitatif Gök-Finans Korelasyon Çerçevesi
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
