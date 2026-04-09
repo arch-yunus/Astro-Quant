@@ -8,11 +8,12 @@ class ConfluenceEngine:
     sentiment score [-1, +1].
     """
 
-    def __init__(self, weights: Optional[Dict[str, float]] = None):
+    def __init__(self, weights: Optional[Dict[str, float]] = None, use_ta: bool = True):
         """
         Weights for each planet in the sentiment calculation.
-        Defaults to higher weight for inner planets (Mercury, Venus).
+        use_ta: Whether to include traditional TA indicators.
         """
+        self.use_ta = use_ta
         self.weights = weights or {
             "Mercury": 0.4,
             "Venus": 0.3,
@@ -34,6 +35,13 @@ class ConfluenceEngine:
                 # Direct = +1, Retrograde = -1
                 planet_influence = df[retro_col].apply(lambda x: -1.0 if x else 1.0)
                 score += planet_influence * weight
+        
+        # Add TA Sentiment (RSI based)
+        if self.use_ta and "rsi" in df.columns:
+            # RSI < 30 (Oversold) -> Positive (+0.2 weight shift)
+            # RSI > 70 (Overbought) -> Negative (-0.2 weight shift)
+            ta_influence = df["rsi"].apply(lambda x: 0.2 if x < 30 else (-0.2 if x > 70 else 0.0))
+            score += ta_influence
                 
         return score
 

@@ -8,8 +8,13 @@ from src.analyzer.backtester import AstroBacktester
 from src.analyzer.optimizer import AstroOptimizer
 from src.analyzer.signals import ConfluenceEngine
 from src.visualizer.charts import AstroVisualizer
+from src.visualizer.orbits import CelestialVisualizer
 from src.analyzer.features import AstroFeatureEngineer
 from src.analyzer.models import AstroPredictor
+from src.analyzer.ta_engine import TechnicalAnalysisEngine
+import plotly.graph_objects as go
+import numpy as np
+from typing import List, Dict, Any
 
 # Page Configuration for "WOW" Factor
 st.set_page_config(page_title="Astro-Quant Master Dashboard", layout="wide", page_icon="??")
@@ -82,14 +87,32 @@ st.divider()
 tab1, tab2, tab3 = st.tabs(["?? Teknik Analiz & Sinyaller", "?? Portföy Performansı", "?? ML Gelecek Tahmini"])
 
 with tab1:
+    st.subheader("?? Fiyat & Göksel Sinyal Analizi")
     fig_price = visualizer.plot_candlesticks_with_events(results, planet="Mercury")
     st.plotly_chart(fig_price, use_container_width=True)
+    
+    st.subheader("?? Teknik Göstergeler (TA)")
+    st.line_chart(results[["rsi"]])
+    st.caption("RSI (Relative Strength Index) - 30/70 Eşikleri")
 
 with tab2:
+    st.subheader("?? Portföy Performans Verileri")
     fig_perf = visualizer.plot_portfolio_performance(results)
     st.plotly_chart(fig_perf, use_container_width=True)
 
 with tab3:
+    st.subheader("?? 3D Göksel Yörünge Haritası")
+    # Fetch current astro states for 3D visualization
+    astro_states = {}
+    now = datetime.datetime.now()
+    for p in ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"]:
+        data = engine.get_planetary_data(now, p)
+        astro_states[p] = data
+        
+    celestial_viz = CelestialVisualizer()
+    fig_orbit = celestial_viz.plot_3d_solar_system(astro_states)
+    st.plotly_chart(fig_orbit, use_container_width=True)
+    
     st.subheader("?? Yapay Zeka (AI) Yön Tahmini")
     # Simple training for the demo context
     df_ml = fe.generate_ml_ready_set(df_enriched, planets=planets)
