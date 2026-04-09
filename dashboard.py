@@ -12,6 +12,8 @@ from src.visualizer.orbits import CelestialVisualizer
 from src.analyzer.features import AstroFeatureEngineer
 from src.analyzer.models import AstroPredictor
 from src.analyzer.ta_engine import TechnicalAnalysisEngine
+from src.analyzer.geometry import CelestialGeometry
+from src.analyzer.stress_test import AstroMonteCarlo
 import plotly.graph_objects as go
 import numpy as np
 from typing import List, Dict, Any
@@ -74,17 +76,30 @@ df_enriched["final_signal"] = df_enriched["signals"] == 1
 results = backtester.run_backtest(df_enriched, signal_col="final_signal")
 metrics = backtester.calculate_performance_metrics(results)
 
+# Geometry & Stress Testing
+geometry = CelestialGeometry()
+monte_carlo = AstroMonteCarlo(iterations=200)
+
+# Fibonacci calculation on last 100 days
+recent_high = df["high"].tail(100).max()
+recent_low = df["low"].tail(100).min()
+fib_levels = geometry.calculate_fibonacci_levels(recent_high, recent_low)
+
+# VaR calculation
+sims = monte_carlo.run_simulation(df, metrics["final_equity"])
+var_95 = monte_carlo.calculate_var(sims)
+
 # --- UI: Metrics Row ---
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Final Bakiye", f"${metrics['final_equity']:,.2f}")
-col2.metric("Toplam Getiri", f"{metrics['total_return']:.2%}")
+col2.metric("Portfolio VaR (95%)", f"${var_95:,.2f}")
 col3.metric("Sharpe Oranı", f"{metrics['annualized_sharpe']:.2f}")
 col4.metric("Maksimum Kayıp", f"{metrics['max_drawdown']:.2%}")
 
 # --- UI: Main Content ---
 st.divider()
 
-tab1, tab2, tab3 = st.tabs(["?? Teknik Analiz & Sinyaller", "?? Portföy Performansı", "?? ML Gelecek Tahmini"])
+tab1, tab2, tab3, tab4 = st.tabs(["?? Teknik & Sinyaller", "?? Portföy Performansı", "?? Geometrik Analiz", "?? ML Gelecek Tahmini"])
 
 with tab1:
     st.subheader("?? Fiyat & Göksel Sinyal Analizi")
@@ -101,6 +116,9 @@ with tab2:
     st.plotly_chart(fig_perf, use_container_width=True)
 
 with tab3:
+    st.subheader("?? Fibonacci Düzeltme Seviyeleri (Recent)")
+    st.table(pd.Series(fib_levels, name="Price Level"))
+    
     st.subheader("?? 3D Göksel Yörünge Haritası")
     # Fetch current astro states for 3D visualization
     astro_states = {}
