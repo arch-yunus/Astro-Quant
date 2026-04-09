@@ -51,3 +51,35 @@ class AstroVisualizer:
             fig.write_html(output_file)
             
         return fig
+
+    def plot_portfolio_performance(self, df: pd.DataFrame, 
+                                   output_file: Optional[str] = None) -> go.Figure:
+        """
+        Visualizes the strategy performance: Equity Curve and Max Drawdown.
+        """
+        fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
+                           vertical_spacing=0.1, subplot_titles=("Strategy Equity Curve", "Daily Returns"),
+                           row_width=[0.3, 0.7])
+
+        # Equity Curve
+        fig.add_trace(go.Scatter(x=df["timestamp"], y=df["equity"],
+                                mode="lines", line=dict(color="green", width=2),
+                                name="Portfolio Equity"), row=1, col=1)
+
+        # Baseline: Initial Capital
+        initial_cap = df["equity"].iloc[0]
+        fig.add_hline(y=initial_cap, line_dash="dash", line_color="white", opacity=0.5, row=1, col=1)
+
+        # Daily Returns
+        fig.add_trace(go.Bar(x=df["timestamp"], y=df["net_strategy_return"] * 100, 
+                            name="Daily ROI (%)", marker_color="royalblue", opacity=0.7), row=2, col=1)
+
+        fig.update_layout(template=self.theme,
+                         height=800,
+                         title_text="Astro-Quant Algorithmic Performance Report",
+                         showlegend=True)
+
+        if output_file:
+            fig.write_html(output_file)
+            
+        return fig

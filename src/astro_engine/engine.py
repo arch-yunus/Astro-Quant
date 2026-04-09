@@ -72,6 +72,46 @@ class AstroEngine:
             
         return diff
 
+    def get_lunar_phase(self, dt: datetime.datetime) -> float:
+        """
+        Calculates Moon phase (0 = New Moon, 180 = Full Moon).
+        Calculated as the difference between Moon and Sun longitude.
+        """
+        jd = self.get_julian_day(dt)
+        sun_data, _ = swe.calc_ut(jd, swe.SUN, swe.FLG_SWIEPH)
+        moon_data, _ = swe.calc_ut(jd, swe.MOON, swe.FLG_SWIEPH)
+        
+        phase = (moon_data[0] - sun_data[0]) % 360
+        return phase
+
+    def get_active_aspects(self, dt: datetime.datetime, planets: List[str], orb: float = 8.0) -> List[Dict]:
+        """
+        Scans for major aspects (0, 60, 90, 120, 180) between planets.
+        """
+        active_aspects = []
+        aspect_targets = {
+            "Conjunction": 0,
+            "Sextile": 60,
+            "Square": 90,
+            "Trine": 120,
+            "Opposition": 180
+        }
+        
+        for i in range(len(planets)):
+            for j in range(i + 1, len(planets)):
+                p1, p2 = planets[i], planets[j]
+                dist = self.get_aspect(dt, p1, p2)
+                
+                for name, target_angle in aspect_targets.items():
+                    if abs(dist - target_angle) <= orb:
+                        active_aspects.append({
+                            "planets": (p1, p2),
+                            "aspect": name,
+                            "distance": dist,
+                            "error": abs(dist - target_angle)
+                        })
+        return active_aspects
+
     def check_event(self, dt: datetime.datetime, planet_name: str, event_type: str = "Retrograde") -> bool:
         """
         Generic event checker (e.g., checking if Mercury is Retrograde).
