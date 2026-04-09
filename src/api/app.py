@@ -6,8 +6,12 @@ from src.astro_engine.engine import AstroEngine
 from src.analyzer.correlation import AstroAnalyzer
 from src.data_ingestion.fetcher import DataFetcher
 from src.analyzer.signals import ConfluenceEngine
+from src.api.webhooks import router as webhook_router
 
 app = FastAPI(title="Astro-Quant API", version="1.0.0")
+
+# Include Routers
+app.include_router(webhook_router)
 
 # Shared Engine Components (Lazy Init in production would be better)
 engine = AstroEngine()
