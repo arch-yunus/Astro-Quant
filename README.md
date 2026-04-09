@@ -1,104 +1,104 @@
-# Astro-Quant: Quantitative Celestial-Financial Correlation Framework
+# Astro-Quant: Kantitatif Gök-Finans Korelasyon Çerçevesi
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
-[![Status: Academic Production](https://img.shields.io/badge/Status-Academic_Production-green.svg)]()
+[![Status: Academic Production](https://img.shields.io/badge/Status-Akademik_Üretim-green.svg)]()
 [![Framework: Medresetü’z-Zehra](https://img.shields.io/badge/Framework-Medreset%C3%BC%E2%80%99z--Zehra-midnightblue.svg)]()
 
-**Astro-Quant** is an advanced, high-density quantitative research framework designed to analyze the historical and algorithmic correlations between celestial mechanics (ephemeris data, planetary cycles, syzygies) and global financial equilibrium (cryptocurrencies, commodities, equities).
+**Astro-Quant**, göksel mekanik (efemeris verileri, gezegen döngüleri, dizilimler) ile küresel finansal denge (kripto varlıklar, emtialar, hisse senetleri) arasındaki tarihsel ve algoritmik korelasyonları analiz etmek üzere tasarlanmış ileri düzey, yüksek yoğunluklu bir kantitatif araştırma çerçevesidir.
 
-By bridging the gap between classical astronomical computation and modern financial data science, Astro-Quant provides a rigorous mathematical environment for backtesting non-linear market drivers and developing asymmetric algorithmic trading strategies.
-
----
-
-## 00. Philosophical Foundation
-Built upon the **Medresetü’z-Zehra** vision of integrating natural sciences with professional expertise, Astro-Quant treats the cosmos as a vast, deterministic clockwork. We hypothesize that macro-cycles in celestial mechanics may reflect or influence systemic human behavior at scale, manifesting as predictable volatility clusters or trend reversals in global liquidity pools.
+Klasik astronomik hesaplamalar ile modern finansal veri bilimi arasındaki boşluğu dolduran Astro-Quant, doğrusal olmayan piyasa iticilerini test etmek (backtesting) ve asimetrik algoritmik ticaret stratejileri geliştirmek için titiz bir matematiksel ortam sunar.
 
 ---
 
-## 01. Core Architecture
-
-The system is architected as a modular pipeline for high-throughput data processing and signal extraction:
-
-### A. Ephemeris Vector Space Mapping (`src/astro_engine`)
-- **Precision Computation**: Integration with standard ephemeris libraries (Swiss Ephemeris / PyEphem) for high-precision planetary positioning.
-- **Harmonics & Aspects**: Real-time calculation of major and minor aspects (Conjunction, Opposition, Trine, Square) mapped to a temporal vector space.
-- **Retrograde Dynamics**: Automated detection of apparent retrograde motion and its impact on market sentiment metadata.
-
-### B. Multi-Source Financial Ingestion (`src/data_ingestion`)
-- **CEX/DEX Connectors**: Native support for Binance, Kraken, and decentralized liquidity pools via Web3 providers.
-- **Legacy Markets**: Robust integration with Yahoo Finance and Alpha Vantage for historical equity and commodity datasets.
-- **Normalization Engine**: Auto-healing pipelines for handling missing time-series data and timezone alignments.
-
-### C. Quantitative Correlation Engine (`src/analyzer`)
-- **Statistical Significance**: Rigorous hypothesis testing using p-values and confidence intervals to filter "spurious correlations."
-- **Volatility Clustering**: Analyzing celestial events as triggers for GARCH-modeled volatility shifts.
-- **Machine Learning Ready**: Exporting high-density feature sets (Planetary Longitude, Latitude, Speed, Phase) directly into Scikit-Learn, TensorFlow, or PyTorch pipelines.
+## 00. Felsefi Temel
+Doğa bilimlerini mesleki uzmanlıkla bütünleştirmeyi hedefleyen **Medresetü’z-Zehra** vizyonu üzerine inşa edilen Astro-Quant, kozmosu devasa ve deterministik bir saat mekanizması olarak ele alır. Göksel mekanikteki makro döngülerin, küresel likidite havuzlarında öngörülebilir volatilite kümeleri veya trend dönüşleri olarak tezahür eden sistematik insan davranışlarını ölçeklenebilir düzeyde yansıttığı hipotezini savunur.
 
 ---
 
-## 02. Directory Scaffolding
+## 01. Çekirdek Mimari
+
+Sistem, yüksek verimli veri işleme ve sinyal çıkarma işlemleri için modüler bir boru hattı (pipeline) olarak yapılandırılmıştır:
+
+### A. Efemeris Vektör Uzayı Eşlemesi (`src/astro_engine`)
+- **Hassas Hesaplama**: Yüksek hassasiyetli gezegen konumlandırması için standart efemeris kütüphaneleri (Swiss Ephemeris / PyEphem) entegrasyonu.
+- **Harmonikler ve Açılar**: Zamansal bir vektör uzayına eşlenmiş majör ve minör açılar (Kavuşum, Karşıt, Üçgen, Kare) gerçek zamanlı hesaplanır.
+- **Retrograd Dinamikleri**: Gezegenlerin geri hareketlerinin otomatik tespiti ve piyasa duyarlılığı üzerindeki etkisinin meta-veri olarak işlenmesi.
+
+### B. Çok Kaynaklı Finansal Veri Çekimi (`src/data_ingestion`)
+- **CEX/DEX Bağlantıları**: Binance, Kraken ve Web3 sağlayıcıları üzerinden merkeziyetsiz likidite havuzları için yerel destek.
+- **Geleneksel Piyasalar**: Tarihsel hisse senedi ve emtia veri setleri için Yahoo Finance ve Alpha Vantage entegrasyonu.
+- **Normalizasyon Motoru**: Eksik zaman serisi verilerinin onarılması ve zaman dilimi hizalamaları için sağlam veri hatları.
+
+### C. Kantitatif Korelasyon Motoru (`src/analyzer`)
+- **İstatistiksel Anlamlılık**: "Sahte korelasyonları" filtrelemek için p-değerleri ve güven aralıkları kullanılarak yapılan titiz hipotez testleri.
+- **Volatilite Kümelenmesi**: Göksel olayların GARCH modelli volatilite değişimleri üzerindeki tetikleyici etkisinin analizi.
+- **Makine Öğrenimi Hazırlığı**: Gezegensel boylam, enlem, hız ve faz gibi yüksek yoğunluklu özellik setlerinin doğrudan Scikit-Learn veya PyTorch hatlarına aktarımı.
+
+---
+
+## 02. Dizin İskeleti
 
 ```text
 Astro-Quant/
-├── src/                        # Core algorithmic engine
-│   ├── astro_engine/           # Celestial coordinate & aspect computation
-│   ├── data_ingestion/         # API connectors (Binance, YFinance, Web3)
-│   ├── analyzer/               # Correlation mathematics & signal logic
-│   └── visualizer/             # Plotly/Matplotlib high-density charting
-├── research/                   # Academic deep-dives & experiment logs
-│   ├── notebooks/              # Jupyter research environments
-│   └── papers/                 # Technical whitepapers (LATEX)
-├── infrastructure/             # Deployment & configuration
-│   ├── api_secrets/            # Managed credentials (local only)
-│   └── docker/                 # Containerization metadata
-├── docs/                       # High-density technical specifications
-├── LICENSE                     # MIT Governance
-└── README.md                   # System Overview
+├── src/                        # Çekirdek algoritmik motor
+│   ├── astro_engine/           # Gök koordinatları ve açı hesaplamaları
+│   ├── data_ingestion/         # API bağlantıları (Binance, YFinance, Web3)
+│   ├── analyzer/               # Korelasyon matematiği ve sinyal mantığı
+│   └── visualizer/             # Plotly/Matplotlib yüksek yoğunluklu grafikler
+├── research/                   # Akademik derinlemesine incelemeler
+│   ├── notebooks/              # Jupyter araştırma ortamları
+│   └── papers/                 # Teknik teknik makaleler (LATEX)
+├── infrastructure/             # Dağıtım ve yapılandırma
+│   ├── api_secrets/            # Yönetilen kimlik bilgileri (yerel)
+│   └── docker/                 # Konteynırlaştırma meta-verileri
+├── docs/                       # Yüksek yoğunluklu teknik spesifikasyonlar
+├── LICENSE                     # MIT Yönetişimi
+└── README.md                   # Sistem Genel Bakışı
 ```
 
 ---
 
-## 03. Engineering Setup
+## 03. Mühendislik Kurulumu
 
-### Environment Initialization
+### Ortam Başlatma
 ```bash
-# Clone the repository
+# Depoyu klonlayın
 git clone https://github.com/arch-yunus/Astro-Quant.git
 cd Astro-Quant
 
-# Initialize virtual research environment
+# Sanal araştırma ortamını oluşturun
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 # .\venv\Scripts\Activate.ps1 # Windows
 
-# Install high-density dependencies
+# Bağımlılıkları yükleyin
 pip install -r requirements.txt
 ```
 
-### Configuration (`infrastructure/.env`)
-Create a `.env` file for secure API orchestration:
+### Yapılandırma (`infrastructure/.env`)
+Güvenli API yönetimi için `.env` dosyası oluşturun:
 ```env
-BINANCE_API_KEY=YOUR_KEY
-BINANCE_API_SECRET=YOUR_SECRET
-SWISS_EPHE_PATH=/path/to/ephe
+BINANCE_API_KEY=ANAHTARINIZ
+BINANCE_API_SECRET=SIRRINIZ
+SWISS_EPHE_PATH=/efemeris/yolu
 ```
 
 ---
 
-## 04. Algorithmic Execution Workflow
+## 04. Algoritmik Yürütme Akışı
 
-**Example**: Analyzing the correlation between Mercury Retrograde and BTC/USDT Volatility over a 10-year horizon.
+**Örnek**: Merkür Retrosu ile BTC/USDT volatilitesi arasındaki 10 yıllık korelasyon analizi.
 
 ```python
 from src.analyzer import AstroFinanceAnalyzer
 from src.data_ingestion import CryptoFetcher
 
-# 1. Initialize High-Density Data Fetching
+# 1. Yüksek Yoğunluklu Veri Çekimini Başlat
 fetcher = CryptoFetcher(symbol="BTCUSDT", interval="1d", depth="10y")
 df = fetcher.get_dataframe()
 
-# 2. Orchestrate Correlation Analysis
+# 2. Korelasyon Analizini Düzenle
 model = AstroFinanceAnalyzer(data=df)
 signal_report = model.evaluate_event(
     planet="Mercury", 
@@ -106,29 +106,29 @@ signal_report = model.evaluate_event(
     metric="Volatility"
 )
 
-# 3. Generate Analytical Output
-print(f"Confidence Level: {signal_report.p_value}")
-print(f"Mean ROI Variance: {signal_report.avg_performance}")
+# 3. Analitik Çıktı Üret
+print(f"Güven Seviyesi: {signal_report.p_value}")
+print(f"Ortalama ROI Varyansı: {signal_report.avg_performance}")
 model.plot_signals("Mercury_Retro_BTC_Correlation.html")
 ```
 
 ---
 
-## 05. Research Roadmap & Tiered Scaffolding
+## 05. Araştırma Yol Haritası (Roadmap)
 
-- [x] **Tier 0**: Core Ephemeris Engine & DataFrame Normalization.
-- [x] **Tier 1**: Basic Correlation Testing (Planetary Aspects vs. Price Action).
-- [ ] **Tier 2**: Advanced Backtesting Engine with Asymmetric Risk Models.
-- [ ] **Tier 3**: Autonomous Signal Generation (Webhook/Discord Integration).
-- [ ] **Tier 4**: Integration of Lunar Phase Liquidity Cycles in DeFi pools.
-- [ ] **Tier 5**: Full Academic Publication of "Celestial Market Drivers" dataset.
-
----
-
-## 06. Governance & Academic Contribution
-This repository serves as a professional, scientifically neutral platform. Contributions must adhere to high-density coding standards and include rigorous documentation of the underlying astronomical/financial logic.
-
-**Disclaimer**: All analytical outputs are for research and educational purposes only. Financial markets are inherently risky; celestial correlations do not constitute investment advice (YTD).
+- [x] **Tier 0**: Çekirdek Efemeris Motoru ve DataFrame Normalizasyonu.
+- [x] **Tier 1**: Temel Korelasyon Testleri (Açılar vs. Fiyat Hareketleri).
+- [ ] **Tier 2**: Asimetrik Risk Modelli Gelişmiş Backtesting Motoru.
+- [ ] **Tier 3**: Otonom Sinyal Üretimi (Webhook/Discord Entegrasyonu).
+- [ ] **Tier 4**: DeFi Havuzlarında Ay Fazı Likidite Döngüleri Entegrasyonu.
+- [ ] **Tier 5**: "Celestial Market Drivers" Veri Setinin Tam Akademik Yayını.
 
 ---
-*Developed under the vision of the Academic Operating System (AOS).*
+
+## 06. Yönetişim ve Akademik Katkı
+Bu depo, profesyonel ve bilimsel olarak tarafsız bir platformdur. Katkıların yüksek yoğunluklu kodlama standartlarına uyması ve temel astronomik/finansal mantığın titizlikle belgelenmesi gerekmektedir.
+
+**Sorumluluk Reddi**: Tüm analitik çıktılar araştırma ve eğitim amaçlıdır. Finansal piyasalar doğası gereği risklidir; göksel korelasyonlar yatırım tavsiyesi (YTD) teşkil etmez.
+
+---
+*Akademik İşletim Sistemi (AOS) vizyonu altında geliştirilmiştir.*
